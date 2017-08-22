@@ -24,6 +24,10 @@ describe Account do
     expect(subject.deactivate).to eq :deactivated
   end
 
+  it 'is expected to have 0 balance on initialize' do
+    expect(subject.balance).to eq 0
+  end
+
   it 'is expected to have an owner' do
     expect(subject.owner).to eq person
   end
