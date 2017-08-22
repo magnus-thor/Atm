@@ -5,13 +5,17 @@ class Person
   attr_accessor :name, :cash, :account
 
   def initialize(attrs = {})
-    set_owner(attrs[:name])
+    @name = set_owner(attrs[:name])
     @cash = 0
     @account = nil
   end
 
   def create_account
     @account = Account.new(owner: self)
+  end
+
+  def deposit(amount)
+    @account == nil ? no_account : deposit_funds(amount)
   end
 
   private
@@ -23,5 +27,12 @@ class Person
     raise 'A name is required'
   end
 
+  def deposit_funds(amount)
+    @cash -= amount
+    @account.balance += amount
+  end
 
+  def no_account
+    raise RuntimeError, 'No account present'
+  end
 end
