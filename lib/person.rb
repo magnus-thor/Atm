@@ -43,7 +43,6 @@ class Person
     pin = args[:pin]
     account = args[:account]
     response = atm.withdraw(amount, pin, account)
-    # response = atm.withdraw(args[:amount], args[:pin], args[account])
     response[:status] == true ? increase_cash(response) : response
   end
 
@@ -54,6 +53,7 @@ class Person
   def missing_atm
     raise 'An ATM is required'
   end
+
   def no_account
     raise RuntimeError, 'No account present'
   end

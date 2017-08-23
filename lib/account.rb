@@ -3,7 +3,7 @@ class Account
   STANDARD_VALIDITY_YRS = 5
   attr_accessor :pin_code, :status, :exp_date, :owner, :balance
 
-  def initialize(attrs ={})
+  def initialize(attrs = {})
     @pin_code = create_pin_number
     @exp_date = exp_date_create
     @status = :active
