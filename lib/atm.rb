@@ -1,10 +1,13 @@
+require './lib/person.rb'
+require './lib/account.rb'
+
 class Atm
   attr_accessor :funds
   def initialize
     @funds = 1000
   end
 
-  def withdraw(amount, pin_code,account)
+  def withdraw(amount, pin_code, account)
     case
     when insufficient_funds_in_account?(amount, account)
       return

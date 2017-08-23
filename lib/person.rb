@@ -1,4 +1,5 @@
 require './lib/account.rb'
+require './lib/atm.rb'
 
 class Person
 
@@ -18,6 +19,10 @@ class Person
     @account == nil ? no_account : deposit_funds(amount)
   end
 
+  def withdraw(amount)
+    @account == nil ? no_account : withdraw_funds(amount)
+  end
+
   private
   def set_owner(obj)
     obj == nil ? missing_owner : @name = obj
@@ -30,6 +35,11 @@ class Person
   def deposit_funds(amount)
     @cash -= amount
     @account.balance += amount
+  end
+
+  def withdraw_funds(amount)
+    @cash += amount
+    @account.balance -= amount
   end
 
   def no_account

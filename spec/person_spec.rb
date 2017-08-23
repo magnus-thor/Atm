@@ -24,6 +24,7 @@ describe Person do
 
   describe 'can create an Account' do
     before { subject.create_account }
+
     it 'of Account class' do
       expect(subject.account).to be_an_instance_of Account
     end
@@ -36,14 +37,29 @@ describe Person do
   describe 'can manage funds if an account has been created' do
     let(:atm) {Atm.new}
     before { subject.create_account }
+
     it 'can deposit funds' do
       expect(subject.deposit(100)).to be_truthy
+    end
+
+    it 'can withdraw funds' do
+      expect(subject.withdraw(100)).to be_truthy
+    end
+
+    it 'funds are added to the accounst balance - deducted from cash' do
+      subject.cash = 100
+      subject.deposit(100)
+      expect(subject.account.balance).to be 100
+      expect(subject.cash).to be 0
     end
   end
 
   describe 'can not manage funds if no account has been created' do
-    it 'cant ' do
+    it 'cant deposit funds ' do
       expect{ subject.deposit(100) }.to raise_error(RuntimeError, 'No account present')
+    end
+    it 'cant withdraw funds' do
+      expect{ subject.withdraw(100) }.to raise_error(RuntimeError, 'No account present')
     end
   end
 end
