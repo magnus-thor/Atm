@@ -15,12 +15,12 @@ class Person
     @account = Account.new(owner: self)
   end
 
-  def deposit(amount)
-    @account == nil ? no_account : deposit_funds(amount)
+  def deposit(args = {})
+    @account == nil ? no_account : deposit_funds(args)
   end
 
-  def withdraw(amount)
-    @account == nil ? no_account : withdraw_funds(amount)
+  def withdraw(args = {})
+    @account == nil ? no_account : withdraw_funds(args)
   end
 
   private
@@ -37,9 +37,18 @@ class Person
     @account.balance += amount
   end
 
-  def withdraw_funds(amount)
-    @cash += amount
-    @account.balance -= amount
+  def withdraw_funds(args = {})
+    atm = args[:atm]
+    amount = args[:amount]
+    pin = args[:pin]
+    account = args[account]
+    response = atm.withdraw(amount, pin, account)
+    # response = atm.withdraw(args[:amount], args[:pin], args[account])
+    response[:status] == true ? increase_cash(response) : response
+  end
+
+  def increase_cash(response)
+    @cash += response[:amount]
   end
 
   def no_account
