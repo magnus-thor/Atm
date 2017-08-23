@@ -1,4 +1,6 @@
 require './lib/account.rb'
+require './lib/person.rb'
+require './lib/account.rb'
 require 'date'
 
 describe Account do
@@ -6,7 +8,7 @@ describe Account do
   subject { described_class.new({owner: person}) }
 
   it 'is expected to create 4 digit pin code' do
-    number = (subject.pin_number)
+    number = (subject.pin_code)
     number_length = Math.log10(number).to_i + 1
     expect(number_length).to eq 4
   end
