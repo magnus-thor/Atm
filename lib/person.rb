@@ -16,11 +16,11 @@ class Person
   end
 
   def deposit(args = {})
-    @account == nil ? no_account : deposit_funds(args)
+    @account.nil? ? no_account : deposit_funds(args)
   end
 
   def withdraw(args = {})
-    @account == nil ? no_account : withdraw_funds(args)
+    @account.nil? ? no_account : withdraw_funds(args)
   end
 
   private
@@ -39,15 +39,13 @@ class Person
 
   def withdraw_funds(args = {})
     args[:atm] == nil ? missing_atm : atm = args[:atm]
-    amount = args[:amount]
-    pin = args[:pin]
-    account = args[:account]
-    response = atm.withdraw(amount, pin, account)
+    response = atm.withdraw(args[:amount], args[:pin], args[:account])
     response[:status] == true ? increase_cash(response) : response
   end
 
   def increase_cash(response)
     @cash += response[:amount]
+    # @account.balance -= response[:amount]
   end
 
   def missing_atm
@@ -55,6 +53,6 @@ class Person
   end
 
   def no_account
-    raise RuntimeError, 'No account present'
+    raise 'No account present'
   end
 end
