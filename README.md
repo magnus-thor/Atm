@@ -2,7 +2,7 @@
 The ATM challenge for Craft Academy
 
 # How to use the program
-First startup ` irb ` then load the program ` load './lib/person.rb'\
+First startup ` irb ` then load the program ` load './lib/person.rb'  
 Create a person in the program `person1 = Person(name: 'put_in_name')`\
 And create an ATM `atm = Atm.new`\
 when that is done you have a few methods to play with and 1000 in cash\
