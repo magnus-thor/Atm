@@ -1,6 +1,3 @@
-require './lib/person.rb'
-require './lib/account.rb'
-
 class Atm
   attr_accessor :funds
   def initialize
@@ -24,6 +21,12 @@ class Atm
     end
   end
 
+  def error_message(message)
+    { status: false,
+      message: message,
+      date: Date.today }
+  end
+  
   private
 
   def insufficient_funds_in_account?(amount, account)
@@ -33,7 +36,11 @@ class Atm
   def perform_transaction(amount, account)
     @funds -= amount
     account.balance -= amount
-    { status: true, message: 'success', date: Date.today, amount: amount, bills: add_bills(amount) }
+    { status: true,
+      message: 'success',
+      date: Date.today,
+      amount: amount,
+      bills: add_bills(amount) }
   end
 
   def add_bills(amount)
@@ -62,9 +69,5 @@ class Atm
 
   def card_active?(is_active)
     is_active != :active
-  end
-
-  def error_message(message)
-    { status: false, message: message, date: Date.today }
   end
 end

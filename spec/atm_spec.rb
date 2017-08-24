@@ -21,30 +21,42 @@ describe Atm do
   end
 
   it 'allow withdraw if account has enough balance.' do
-    expected_output = { status: true, message: 'success', date: Date.today, amount: 45, bills: [20, 20, 5] }
+    expected_output = { status: true,
+      message: 'success',
+      date: Date.today,
+      amount: 45,
+      bills: [20, 20, 5] }
     expect(subject.withdraw(45, '1234', account)).to eq expected_output
   end
 
   it 'reject withdraw if ATM has insufficient funds' do
     subject.funds = 50
-    expected_output = { status: false, message: 'insufficient funds in ATM', date: Date.today}
+    expected_output = { status: false,
+      message: 'insufficient funds in ATM',
+      date: Date.today}
     expect(subject.withdraw(100, '1234', account)).to eq expected_output
   end
 
   it 'reject withdraw if pin is wrong' do
-    expected_output = { status: false, message: 'wrong pin', date: Date.today}
+    expected_output = { status: false,
+      message: 'wrong pin',
+      date: Date.today}
     expect(subject.withdraw(50, 9999, account)).to eq expected_output
   end
 
   it 'reject withdraw if card is expired' do
     allow(account).to receive(:exp_date).and_return('12/15')
-    expected_output = { status: false, message: 'card expired', date: Date.today }
+    expected_output = { status: false,
+      message: 'card expired',
+      date: Date.today }
     expect(subject.withdraw(6, '1234', account)).to eq expected_output
   end
 
   it 'reject card if it is disabled' do
     allow(account).to receive(:status).and_return(:disabled)
-    expected_output = { status: false, message: 'card is disabled', date: Date.today }
+    expected_output = { status: false,
+      message: 'card is disabled',
+      date: Date.today }
     expect(subject.withdraw(6, '1234', account)).to eq expected_output
   end
 end

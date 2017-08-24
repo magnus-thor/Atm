@@ -7,7 +7,7 @@ class Person
 
   def initialize(attrs = {})
     @name = set_owner(attrs[:name])
-    @cash = 0
+    @cash = 1000
     @account = nil
   end
 
@@ -19,7 +19,7 @@ class Person
     @account.nil? ? no_account : deposit_funds(args)
   end
 
-  def withdraw(args = {})
+  def get_cash(args = {})
     @account.nil? ? no_account : withdraw_funds(args)
   end
 
@@ -33,8 +33,12 @@ class Person
   end
 
   def deposit_funds(amount)
-    @cash -= amount
-    @account.balance += amount
+    if @cash >= amount
+      @cash -= amount
+      @account.balance += amount
+    else
+      'You dont have enough money to do that'
+    end
   end
 
   def withdraw_funds(args = {})
@@ -45,7 +49,7 @@ class Person
 
   def increase_cash(response)
     @cash += response[:amount]
-    # @account.balance -= response[:amount]
+    @account.balance -= response[:amount]
   end
 
   def missing_atm

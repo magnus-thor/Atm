@@ -1,3 +1,5 @@
+require 'date'
+
 class Account
 
   STANDARD_VALIDITY_YRS = 5
@@ -8,7 +10,7 @@ class Account
     @pin_code = create_pin_number
     @exp_date = exp_date_create
     @status = :active
-    set_owner(attrs[:owner])
+    @owner = set_owner(attrs[:owner])
     @balance = 0
   end
 
@@ -22,7 +24,7 @@ class Account
   end
 
   def set_owner(obj)
-    obj == nil ? missing_owner : @owner = obj
+    obj == nil ? missing_owner : obj
   end
 
   def missing_owner
