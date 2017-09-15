@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/magnus-thor/Atm/badge.svg?branch=master)](https://coveralls.io/github/magnus-thor/Atm?branch=master)
+
 # ATM Challenge
 The ATM challenge for Craft Academy
 
