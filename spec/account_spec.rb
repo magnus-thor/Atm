@@ -1,3 +1,5 @@
+require 'coveralls'
+Coveralls.wear!
 require './lib/account.rb'
 require './lib/person.rb'
 require './lib/account.rb'

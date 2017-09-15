@@ -44,9 +44,6 @@ describe Person do
     end
 
     it 'can not deposit if cash is less than deposit amount' do
-      expected_output = { status: false,
-        message: 'You dont have enough money to do that',
-        date: Date.today }
         expect(subject.deposit(2000)).to eq 'You dont have enough money to do that'
       end
 
